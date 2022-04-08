@@ -80,7 +80,56 @@
           font-size: 18px;
           color: #CEDDD5;
         }
+        .containerC {
+          background-color: rgba(44, 36, 3, 0.8);
+          width: 500px;
+          height: 638px;
+          padding: 10px;
+          position: absolute;
+          left: 525px;
+          top: 95px;
+        }
+        .containerC input{
+          padding: 20px;
+          border-radius: 15px;
+          background-color: rgba(44, 36, 3, 0.5);
+          width: 220px;
+          font-family: monospace;
+          border-color: white;
+          font-size: 18px;
+          color: #CEDDD5;
+        }
+        .containerK {
+          background-color: rgba(44, 36, 3, 0.8);
+          width: 500px;
+          height: 638px;
+          padding: 10px;
+          position: absolute;
+          width: 466px;
+          left: 1050px;
+          top: 95px;
+        }
+        .containerK input{
+          padding: 20px;
+          border-radius: 15px;
+          background-color: rgba(44, 36, 3, 0.5);
+          width: 220px;
+          font-family: monospace;
+          border-color: white;
+          font-size: 18px;
+          color: #CEDDD5;
+        }
         .container p{
+          font-family: monospace;
+          font-size: 25px;
+          color: #CEDDD5
+        }
+        .containerC p{
+          font-family: monospace;
+          font-size: 25px;
+          color: #CEDDD5
+        }
+        .containerK p{
           font-family: monospace;
           font-size: 25px;
           color: #CEDDD5
@@ -91,26 +140,43 @@
           font-family: monospace;
           text-align: center;
         }
-        .dropdown{
-          width: 150px;
-          height: 150px;
-          position: absolute;
-        }
-        .dropdown-item{
-          width: 146px;
-          height: 53px;
+        .containerC h1{
+          font-size:40px;
+          color:#CEDDD5;
           font-family: monospace;
-          color: #2C2403;
-          background-color: #A4AE9D;
-          border-width: 0;
-          position: relative;
-          z-index: 1;
-          margin: -1;
+          text-align: center;
         }
-        .dropdown-item:hover {
-          background-color: #2C2403;
-          color: #A4AE9D;
+        .containerK h1{
+          font-size:40px;
+          color:#CEDDD5;
+          font-family: monospace;
+          text-align: center;
         }
+         @media only screen and (max-width: 1500px){
+           [class="containerK"]{
+             position: absolute;
+             top: 760px;
+             left: 0px;
+             width: 500px;
+
+           }
+         }
+         @media only screen and (max-width: 900px){
+           [class="containerC"]{
+             position: absolute;
+             top: 760px;
+             left: 0px;
+             width: 500px;
+
+           }
+           [class="containerK"]{
+             position: absolute;
+             top: 1460px;
+             left: 0px;
+             width: 500px;
+
+           }
+         }
     </style>
   </head>
   <body>
@@ -141,7 +207,7 @@
           </script>
           </form>
       </div>
-      <div class="container" style="position: absolute; left: 525px; top: 95px;">
+      <div class="containerC">
         <form action="mainPage.html" method="post">
         <div style="padding:20px; margin: -20px;">
           <h1>Contact</h1>
@@ -160,7 +226,7 @@
         </div>
       </form>
       </div>
-      <div class="container" style="position: absolute; width: 466px; left: 1050px; top: 95px;">
+      <div class="containerK">
         <div style="padding:20px; margin-top:20px;">
           <h1 style="margin-top:-20px;">Add Card</h1>
         </div>
