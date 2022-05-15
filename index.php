@@ -188,7 +188,20 @@
          $row = $result->fetch_assoc();
          $idofuser = $row["userid"];
          $_SESSION["userid"] = $idofuser;
-         header("location: mainPage.php");
+
+         $sql = "SELECT role
+                 FROM users
+                 WHERE email = '$email';";
+         $result = $conn->query($sql);
+         $row = $result->fetch_assoc();
+         $role = $row["role"];
+         if ($role == "admin") {
+          header("location: admin.php");
+         }
+         else {
+           header("location: mainPage.php");
+         }
+
        }
      }
    }
