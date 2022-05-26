@@ -310,7 +310,7 @@
       }
       if (empty($numberErr)) {
             $sql = "UPDATE users
-            SET username = '$name'
+            SET phonenumber = '$number'
             WHERE userid = '$idofuser'";
             if ($conn->query($sql) === TRUE) {}
       }
@@ -389,7 +389,7 @@
           <input style=" margin:0px 0px 0px 25px; cursor:pointer; background-color: #584E34;" type="submit" name="emailChange" value="Change">
         </div>
         <div>
-          <p style="margin-left:15px;">Phone Number: 0111 222 3333</p>
+          <p style="margin-left:15px;">Phone Number: 111 222 3333</p>
           <p style="margin-left:15px;">Change Phone Number:</p>
           <input style="font-size: 15px; margin-left:15px;" type="text" name="phoneNumber" placeholder="Current Phone Number"> <br><br>
           <input style="font-size: 15px; margin-left:15px;" type="text" name="newnumber" placeholder="New Phone Number">
