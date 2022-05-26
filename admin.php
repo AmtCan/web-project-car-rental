@@ -20,6 +20,11 @@
     $user_name = $row["username"];
     $_SESSION['username'] = $user_name;
     // Carid and Car image selection.
+    $cartypes = [];
+    $car_array = [];
+    $car_brand = [];
+    $car_id = [];
+    $carcount = 0;
     $sql = "SELECT *
           FROM cars;";
           $result = $conn->query($sql);
@@ -32,6 +37,13 @@
     if (isset($_POST["adding"])) {
       header("location:insertcar.php");
     }
+    // car type selection
+    $sql = "SELECT DISTINCT cartype
+          FROM cars;";
+          $result = $conn->query($sql);
+          while ($row = $result->fetch_assoc()) {
+      $cartypes[] = $row['cartype'];
+     }
 
     // Car brand selection.
     $sql = "SELECT DISTINCT carbrand
@@ -48,17 +60,16 @@
     }
 
     // Selecting brand.
-    $car_id = [];
     if (isset($_POST["submitbrand"])) {
 
       $brand = $_POST["brand"];
+      $type = $_POST["types"];
       $start = $_POST["startdate"];
       $end = $_POST["enddate"];
       $city = $_POST["City"];
 
-
       if (empty($start) || empty($end)) {
-        if ($city == "All cities" && $brand == "All cars") {
+        if ($city == "All cities" && $brand == "All cars" && $type == "All types") {
           $sql = "SELECT *
                   FROM cars
                   ";
@@ -67,8 +78,33 @@
             $car_array[]= $row['carimage'];
             $car_id[]= $row['carid'];
           }
+          $carcount = count($car_array);
         }
-        elseif ($city == "All cities") {
+        elseif ($city == "All cities" && $brand == "All cars") {
+          $sql = "SELECT *
+                  FROM cars
+                  WHERE cartype = '$type'
+                  ";
+          $result = $conn->query($sql);
+          while ($row = $result->fetch_assoc()) {
+            $car_array[]= $row['carimage'];
+            $car_id[]= $row['carid'];
+          }
+          $carcount = count($car_array);
+        }
+        elseif ($type == "All types" && $brand == "All cars") {
+          $sql = "SELECT *
+                  FROM cars
+                  WHERE caraddress = '$city'
+                  ";
+          $result = $conn->query($sql);
+          while ($row = $result->fetch_assoc()) {
+            $car_array[]= $row['carimage'];
+            $car_id[]= $row['carid'];
+          }
+          $carcount = count($car_array);
+        }
+        elseif ($type == "All types" && $city == "All cities") {
           $sql = "SELECT *
                   FROM cars
                   WHERE carbrand = '$brand'
@@ -78,11 +114,24 @@
             $car_array[]= $row['carimage'];
             $car_id[]= $row['carid'];
           }
+          $carcount = count($car_array);
+        }
+        elseif ($city == "All cities") {
+          $sql = "SELECT *
+                  FROM cars
+                  WHERE carbrand = '$brand' AND cartype = '$type';
+                  ";
+          $result = $conn->query($sql);
+          while ($row = $result->fetch_assoc()) {
+            $car_array[]= $row['carimage'];
+            $car_id[]= $row['carid'];
+          }
+          $carcount = count($car_array);
         }
         elseif ($brand == "All cars") {
           $sql = "SELECT *
                   FROM cars
-                  WHERE caraddress = '$city'
+                  WHERE caraddress = '$city' AND cartype = '$type';
                   ";
           $result = $conn->query($sql);
 
@@ -90,11 +139,25 @@
             $car_array[]= $row['carimage'];
             $car_id[]= $row['carid'];
           }
+          $carcount = count($car_array);
+        }
+        elseif ($brand == "All types") {
+          $sql = "SELECT *
+                  FROM cars
+                  WHERE caraddress = '$city' AND carbrand = '$brand';
+                  ";
+          $result = $conn->query($sql);
+
+          while ($row = $result->fetch_assoc()) {
+            $car_array[]= $row['carimage'];
+            $car_id[]= $row['carid'];
+          }
+          $carcount = count($car_array);
         }
         else {
           $sql = "SELECT *
                   FROM cars
-                  WHERE carbrand ='$brand' AND caraddress = '$city' ";
+                  WHERE carbrand ='$brand' AND caraddress = '$city' AND cartype = '$type' ";
           $result = $conn->query($sql);
           if ($result->num_rows > 0) {
               // output data of each row
@@ -102,43 +165,139 @@
                 $car_array[]= $row['carimage'];
                 $car_id[]= $row['carid'];
               }
+              $carcount = count($car_array);
             }
             $conn->close();
-        }
-      }
-
-
-      else {
-        if ($brand == "All cars") {
-          $sql = "SELECT *
-                  FROM cars
-                  WHERE caraddress = '$city' AND carid NOT IN (SELECT carids
-                          FROM reservation
-                          WHERE (startdate BETWEEN '$start' AND '$end') OR
-                          (enddate BETWEEN '$start' AND '$end') OR
-                          ('$start' BETWEEN startdate AND enddate) OR
-                          ('$end' BETWEEN startdate AND enddate))";
-          $result = $conn->query($sql);
-          while ($row = $result->fetch_assoc()) {
-            $car_array[]= $row['carimage'];
-            $car_id[]= $row['carid'];
           }
         }
         else {
-
-          $sql = "SELECT *
-                  FROM cars
-                  WHERE (caraddress = '$city') AND (carbrand = '$brand' AND carid NOT IN (SELECT carids
-                          FROM reservation
-                          WHERE (startdate BETWEEN '$start' AND '$end') OR (enddate BETWEEN '$start' AND '$end')))";
-          $result = $conn->query($sql);
-          while ($row = $result->fetch_assoc()) {
-            $car_array[]= $row['carimage'];
-            $car_id[]= $row['carid'];
+          if ($brand == "All cars" && $city == "All cities" && $type == "All types") {
+            $sql = "SELECT *
+                    FROM cars
+                    WHERE carid NOT IN (SELECT carids
+                            FROM reservation
+                            WHERE (startdate BETWEEN '$start' AND '$end') OR
+                            (enddate BETWEEN '$start' AND '$end') OR
+                            ('$start' BETWEEN startdate AND enddate) OR
+                            ('$end' BETWEEN startdate AND enddate))";
+            $result = $conn->query($sql);
+            while ($row = $result->fetch_assoc()) {
+              $car_array[]= $row['carimage'];
+              $car_id[]= $row['carid'];
+            }
+            $carcount = count($car_array);
+          }
+          elseif ($brand == "All cars" && $city == "All cities") {
+            $sql = "SELECT *
+                    FROM cars
+                    WHERE cartype = '$type' AND (carid NOT IN (SELECT carids
+                            FROM reservation
+                            WHERE (startdate BETWEEN '$start' AND '$end') OR
+                            (enddate BETWEEN '$start' AND '$end') OR
+                            ('$start' BETWEEN startdate AND enddate) OR
+                            ('$end' BETWEEN startdate AND enddate))) ";
+            $result = $conn->query($sql);
+            while ($row = $result->fetch_assoc()) {
+              $car_array[]= $row['carimage'];
+              $car_id[]= $row['carid'];
+            }
+            $carcount = count($car_array);
+          }
+          elseif ($brand == "All cars" && $type == "All types") {
+            $sql = "SELECT *
+                    FROM cars
+                    WHERE caraddress = '$city' AND (carid NOT IN (SELECT carids
+                            FROM reservation
+                            WHERE (startdate BETWEEN '$start' AND '$end') OR
+                            (enddate BETWEEN '$start' AND '$end') OR
+                            ('$start' BETWEEN startdate AND enddate) OR
+                            ('$end' BETWEEN startdate AND enddate)))";
+            $result = $conn->query($sql);
+            while ($row = $result->fetch_assoc()) {
+              $car_array[]= $row['carimage'];
+              $car_id[]= $row['carid'];
+            }
+            $carcount = count($car_array);
+          }
+          elseif ($type == "All types" && $city == "All cities") {
+            $sql = "SELECT *
+                    FROM cars
+                    WHERE carbrand = '$brand' AND (carid NOT IN (SELECT carids
+                            FROM reservation
+                            WHERE (startdate BETWEEN '$start' AND '$end') OR
+                            (enddate BETWEEN '$start' AND '$end') OR
+                            ('$start' BETWEEN startdate AND enddate) OR
+                            ('$end' BETWEEN startdate AND enddate)))";
+            $result = $conn->query($sql);
+            while ($row = $result->fetch_assoc()) {
+              $car_array[]= $row['carimage'];
+              $car_id[]= $row['carid'];
+            }
+            $carcount = count($car_array);
+          }
+          elseif ($brand == "All cars") {
+            $sql = "SELECT *
+                    FROM cars
+                    WHERE (carbrand = '$brand') AND (caraddress = '$city' AND (carid NOT IN (SELECT carids
+                            FROM reservation
+                            WHERE (startdate BETWEEN '$start' AND '$end') OR
+                            (enddate BETWEEN '$start' AND '$end') OR
+                            ('$start' BETWEEN startdate AND enddate) OR
+                            ('$end' BETWEEN startdate AND enddate))))";
+            $result = $conn->query($sql);
+            while ($row = $result->fetch_assoc()) {
+              $car_array[]= $row['carimage'];
+              $car_id[]= $row['carid'];
+            }
+            $carcount = count($car_array);
+          }
+          elseif ($city == "All cities") {
+            $sql = "SELECT *
+                    FROM cars
+                    WHERE (cartype = '$type') AND (carbrand = '$brand' AND (carid NOT IN (SELECT carids
+                            FROM reservation
+                            WHERE (startdate BETWEEN '$start' AND '$end') OR
+                            (enddate BETWEEN '$start' AND '$end') OR
+                            ('$start' BETWEEN startdate AND enddate) OR
+                            ('$end' BETWEEN startdate AND enddate))))";
+            $result = $conn->query($sql);
+            while ($row = $result->fetch_assoc()) {
+              $car_array[]= $row['carimage'];
+              $car_id[]= $row['carid'];
+            }
+            $carcount = count($car_array);
+          }
+          elseif ($type == "All types") {
+            $sql = "SELECT *
+                    FROM cars
+                    WHERE (carbrand = '$brand') AND (caraddress = '$city' AND (carid NOT IN (SELECT carids
+                            FROM reservation
+                            WHERE (startdate BETWEEN '$start' AND '$end') OR
+                            (enddate BETWEEN '$start' AND '$end') OR
+                            ('$start' BETWEEN startdate AND enddate) OR
+                            ('$end' BETWEEN startdate AND enddate))))";
+            $result = $conn->query($sql);
+            while ($row = $result->fetch_assoc()) {
+              $car_array[]= $row['carimage'];
+              $car_id[]= $row['carid'];
+            }
+            $carcount = count($car_array);
+          }
+          else {
+            $sql = "SELECT *
+                    FROM cars
+                    WHERE (cartype = '$type') AND ((caraddress = '$city') AND (carbrand = '$brand' AND carid NOT IN (SELECT carids
+                            FROM reservation
+                            WHERE (startdate BETWEEN '$start' AND '$end') OR (enddate BETWEEN '$start' AND '$end'))))";
+            $result = $conn->query($sql);
+            while ($row = $result->fetch_assoc()) {
+              $car_array[]= $row['carimage'];
+              $car_id[]= $row['carid'];
+            }
+            $carcount = count($car_array);
           }
         }
       }
-    }
     else {
       $sql = "SELECT *
               FROM cars;";
@@ -146,8 +305,8 @@
       while ($row = $result->fetch_assoc()) {
         $car_array[]= $row['carimage'];
         $car_id[]= $row['carid'];
-
       }
+      $carcount = count($car_array);
     }
     // Adding ids to Session.
     if (count($car_id) == 0) {
@@ -285,8 +444,8 @@
             color: #A4AE9D;
           }
           .carContainer{
-            width: 800px;
-            height: 567px;
+            width: 52%;
+            height: 72%;
             background-color: rgba(44, 36, 3, 0.5);
             overflow-y: scroll;
             border-radius:15px;
@@ -314,7 +473,7 @@
           .carContainer input{
             background-color:#767C68;
             border-color: #767C68;
-            height: 24.6%;
+            height: 140px;
             padding: 10px;
             font-size: 25px;
             color: rgba(44, 36, 3);
@@ -359,6 +518,29 @@
             background:  #CEDDD5 ;
             border-radius: 5px;
           }
+          .carcount{
+            text-align: center;
+            width: 52%;
+            position: absolute;
+            left: 35%;
+            font-size: 25px;
+            background-color: rgba(44, 36, 3, 0.5);
+            height: 45px;
+            border-radius: 10px;
+            margin-top: 2px;
+            border-style: solid;
+            border-color: #CEDDD5;
+          }
+          .carcount p{
+            margin-top:5px;
+            font-family: georgia;
+            color: white;
+          }
+          @media only screen and (max-width: 1400px){
+            [class = "carcount"]{
+              bottom: 0%;
+            }
+          }
           @media only screen and (max-width: 1200px) {
             /* For mobile phones: */
             [class="container"] {
@@ -372,6 +554,10 @@
               float: left;
               width: 90%;
               left: 1%;
+            }
+            [class = "carcount"]{
+              left: 20%;
+              top: 550px;
             }
             [class="addCon"]{
               float: right;
@@ -437,6 +623,11 @@
                 <option value="All cars">All cars</option>
               </select>
             </p>
+            <p id="cartype">Car Type:
+              <select class="selecter" id="types" name = "types">
+                <option value="All types">All types</option>
+              </select>
+            </p>
               <p>Start Date:
                 <input style="width:175px; height:10px;" type="date" name="startdate" value=""><p style=""><?php echo $dateError; ?></p>
               </p>
@@ -452,7 +643,25 @@
               </div>
     <div id="car-con"  class="carContainer">
     </div>
+    <div class="carcount">
+      <p>Car number: <?php echo $carcount; ?> </p>
+    </div>
       <script>
+
+        var types = <?php echo json_encode($cartypes); ?>;
+        var typeSelect = document.getElementById("cartype");
+        var typelist = document.getElementById("types");
+        typelist.classList.add("selecter");
+        for (var i = 0; i < types.length; i++) {
+          var option = document.createElement("option");
+          option.value = types[i];
+          option.name = types[i];
+          option.text = types[i];
+          typelist.appendChild(option);
+        }
+        typeSelect.appendChild(typelist);
+
+
         var cities = <?php echo json_encode($cities); ?>;
         var cityselect = document.getElementById("CarCity");
         var citylist = document.getElementById("City");
