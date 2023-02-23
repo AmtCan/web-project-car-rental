@@ -1,0 +1,121 @@
+        .fa {
+          opacity: 1;
+          text-decoration: none;
+        }
+        #About {
+          position: absolute;
+          display: none;
+          width: 700px;
+          height: 400px;
+          top: 200px;
+          left: 100px;
+          background-color: rgba(0,0,0,0.6);
+          z-index: 2;
+        }
+        #Contact {
+          position: absolute;
+          display: none;
+          width: 700px;
+          height: 400px;
+          top: 200px;
+          left: 100px;
+          background-color: rgba(0,0,0,0.6);
+          z-index: 2;
+        }
+        #aboutSite {
+          position: absolute;
+          top: 50px;
+          left: 100px;
+          font-size: 20px;
+          color: #CEDDD5;
+        }
+        #aboutContact {
+          position: absolute;
+          top: 20px;
+          left: 100px;
+          font-size: 20px;
+          color: #CEDDD5;
+        }
+        body {
+          background-image: url('../photos/bg/bg-login.jpg');
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+          margin: 0;
+          font-family: monospace;
+        }
+        .topnav {
+          overflow: hidden;
+          background-color: #2C2403;
+        }
+        .topnav a {
+          float: left;
+          border-color: white;
+          color: white;
+          text-align: center;
+          padding: 2.6% 5.5%;
+          text-decoration: none;
+          font-size: 17px;
+        }
+        .topnav a:hover{
+          background-color: #A4AE9D;
+          color: black;
+        }
+        .container {
+          background-color: rgba(44, 36, 3, 0.8);
+          width: 350px;
+          height: 500px;
+          padding: 10px;
+          border-radius: 25px;
+          position: absolute;
+          right: 10%; top: 25%;
+
+        }
+        .container input{
+          padding: 20px;
+          border-radius: 15px;
+          background-color: rgba(44, 36, 3, 0.5);
+          width: 220px;
+          font-family: monospace;
+          border-color: white;
+          font-size: 18px;
+          color: #CEDDD5;
+        }
+        .container span{
+          text-align: center;
+          color: white;
+          font-size: 8px;
+        }
+        .sign-container {
+          background-color: rgba(44, 36, 3, 0.8);
+          text-align: center;
+          width: 350px;
+          height: 525px;
+          padding: 10px;
+          border-radius: 25px;
+          position: absolute;
+          left: 10%; top:25%;
+        }
+        .sign-container input{
+          padding: 20px;
+          border-radius: 15px;
+          background-color: rgba(44, 36, 3, 0.5);
+          width: 220px;
+          font-family: monospace;
+          border-color: white;
+          font-size: 18px;
+          color: #CEDDD5;
+        }
+        .aboutS{
+          background-color: red;
+        }
+        @media only screen and (max-width: 900px) {
+          /* For mobile phones: */
+          [class="sign-container"] {
+            top: 650px;
+            left: 5%;
+          }
+          [class="container"] {
+            left: 5%;
+          }
+        }
