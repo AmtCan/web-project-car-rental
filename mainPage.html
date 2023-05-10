@@ -1,0 +1,337 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+          .fa {
+            opacity: 1;
+            text-decoration: none;
+          }
+          body{
+            margin: 0;
+            background-image: url("car8.jpg");
+            animation:image 25s infinite alternate;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+          }
+          @keyframes image{
+            0%{
+              background:url("car8.jpg");
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+              background-size: cover;
+            }
+            25%{
+              background:url("car7.jpg");
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+              background-size: cover;
+            }
+            50%{
+              background:url("car5.jpg");
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+              background-size: cover;
+            }
+            75%{
+              background:url("car4.jpg");
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+              background-size: cover;
+            }
+            100%{
+              background:url("car1.jpg");
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+              background-size: cover;
+            }
+          }
+          .topnav {
+            overflow: hidden;
+            background-color: #2C2403;
+          }
+        .topnav a {
+          float: left;
+          border-color: white;
+          color: white;
+          text-align: center;
+          padding: 2.6% 5.5%;
+          text-decoration: none;
+          font-size: 17px;
+        }
+        .topnav a:hover{
+          background-color: #A4AE9D;
+          color: black;
+        }
+        .container {
+          background-color: rgba(44, 36, 3, 0.8);
+          text-align: center;
+          width: 350px;
+          height: 550px;
+          padding: 10px;
+          border-radius: 25px;
+          border-style: solid;
+          border-color: #CEDDD5;
+          position: absolute;
+          top: 20%;
+          left: 1%;
+        }
+        .container p{
+          color: #CEDDD5;
+          font-size: 20px;
+          font-family: monospace;
+          float: left;
+
+        }
+        .container input{
+          padding: 20px;
+          border-radius: 15px;
+          background-color: rgba(44, 36, 3, 0.5);
+          width: 220px;
+          font-family: monospace;
+          font-size: 18px;
+          color: #CEDDD5;
+
+        }
+        .container h1{
+          font-size: 25;
+          font-family: monospace;
+          color: #CEDDD5;
+        }
+        .dropdown{
+          width: 150px;
+          height: 150px;
+          position: absolute;
+        }
+        .selecter{
+          border-radius: 25px;
+          width: 200px;
+          font-size: 20;
+          background-color: #767C68;
+        }
+        .selecter option{
+          color: white;
+        }
+        .dropdown-item{
+          width: 146px;
+          height: 53px;
+          font-family: monospace;
+          color: #2C2403;
+          background-color: #A4AE9D;
+          border-width: 0;
+          position: relative;
+          z-index: 1;
+          margin: -1;
+        }
+        .dropdown-item:hover {
+          background-color: #2C2403;
+          color: #A4AE9D;
+        }
+        .carContainer{
+          width: 800px;
+          height: 567px;
+          background-color: rgba(44, 36, 3, 0.5);
+          overflow-y: scroll;
+          border-radius:15px;
+          border-style: solid;
+          border-color: #CEDDD5;
+          position: absolute;
+          top: 20%;
+          left: 35%;
+        }
+        .carContainer p{
+          padding-left: 35px;
+          font-size: 35px;
+          color: #CEDDD5;
+          cursor: pointer;
+        }
+        .carContainer p:hover{
+          color: black;
+          background-color: #A4AE9D;
+        }
+        ::-webkit-scrollbar-track {
+          box-shadow:  0 0 5px white;
+          border-radius: 10px;
+        }
+        ::-webkit-scrollbar {
+          width: 20px;
+          color: white;
+        }
+        ::-webkit-scrollbar-thumb {
+          background:  #CEDDD5 ;
+          border-radius: 5px;
+        }
+        @media only screen and (max-width: 1200px) {
+          /* For mobile phones: */
+          [class="container"] {
+            top: 100px;
+            float: left;
+            width: 90%;
+            height: 400px;
+          }
+          [class="carContainer"]{
+            top: 600px;
+            float: left;
+            width: 90%;
+            left: 1%;
+          }
+        }
+    </style>
+  </head>
+  <body>
+    <div class="topnav">
+      <a class="fa fa-home" onclick="offAll();" href="mainPage.html"> Home</a>
+        <script type="text/javascript">
+          function offAll(){
+            offA();
+            offS();
+          }
+        </script>
+      <a class="fa fa-book" onclick="onA()" href="Cards.html"> My Cards</a>
+      <script>
+        function onA() {
+          document.getElementById("About").style.display = "block";
+          offC();
+          offS();
+        }
+        function offA() {
+          document.getElementById("About").style.display = "none";
+        }
+      </script>
+      <a style="float: right; padding: 40px 66px; cursor: pointer; text-decoration: none;" class="fa fa-power-off topnav" onclick="onOffDrop()">
+      </a>
+      <div id="drop" class="dropdown" style="position: absolute; top: 97.5px; right: -4.7; display: none;">
+        <button onclick="profilePage()" class="dropdown-item" type="button" name="button">
+          Profile
+        </button>
+        <button onclick="signOut()" class="dropdown-item" type="button" name="button">
+          Sign Out
+        </button>
+      </div>
+      <script>
+        function signOut() {
+          location.href =  "index.html";
+        }
+        function profilePage(){
+          location.href =  "profile.html";
+        }
+        function onOffDrop(){
+          if (document.getElementById("drop").style.display == "block") {
+              document.getElementById("drop").style.display = "none";
+          }
+          else {
+              document.getElementById("drop").style.display = "block";
+          }
+        }
+        function clickCar(){
+          location.href = "carPage.html";
+        }
+        </script>
+      </div>
+    <div class="container">
+        <h1>Filter</h1>
+          <p>Brand:
+            <select  class="selecter" name="Brand" id="Brand">
+              <option value="bmw">bmw</option>
+              <option value="audi">audi</option>
+              <option value="tesla">tesla</option>
+              <option value="tofas">tofas</option>
+              <option value="mercedes">mercedes</option>
+            </select>
+            </p>
+                  <p>Value(max):
+                  <select class="selecter" name="maxValue" id="maxValue">
+                    <option value="max300">300 TL</option>
+                    <option value="max500">500 TL</option>
+                    <option value="max800">800 TL</option>
+                    <option value="max1100">1100 TL</option>
+                    <option value="max1400">1400 TL</option>
+                  </select>
+                  </p>
+                  <p>Value(min):
+                  <select class="selecter" name="minValue" id="minValue">
+                    <option value="min0">0TL</option>
+                    <option value="min300">300 TL</option>
+                    <option value="min500">500 TL</option>
+                    <option value="min800">800 TL</option>
+                    <option value="min1100">1100 TL</option>
+                  </select>
+                  </p>
+                  <p>Color:
+                    <select style="width: 40px;" class="selecter" name="Color" id="Color">
+                      <option style="color: red;" value="red">◼</option>
+                      <option style="color: blue;" value="red">◼</option>
+                      <option style="color: green;" value="red">◼</option>
+                      <option style="color: yellow;" value="red">◼</option>
+                      <option style="color: black;" value="red">◼</option>
+                      <option style="color: white;" value="red">◼</option>
+                      <option style="color: orange;" value="red">◼</option>
+                    </select>
+                  </p>
+                  <p>City:
+                    <select class="selecter" name="City" id="City">
+                      <option value="Antalya">Antalya</option>
+                      <option value="Bartin">Bartın</option>
+                      <option value="Ankara">Ankara</option>
+                      <option value="Izmir">İzmir</option>
+                      <option value="Trabzon">Trabzon</option>
+                      <option value="Istanbul">İstanbul</option>
+                      <option value="Adana">Adana</option>
+                      <option value="Mersin">Mersin</option>
+                      <option value="Aydin">Aydın</option>
+                      <option value="Erzurum">Erzurum</option>
+                    </select>
+                    <button style="background-color: #767C68; color: black; border-width: 1px; border-radius: 15px;" onclick="localOn()" type="button" name="button">Select</button>
+
+                  </p>
+                  <p style="display:none;" name="Location" id="Location">Location:
+                    <select class="selecter" name="Location" id="Locations">
+                      <option value="Airport">Airport</option>
+                      <option value="Center">Center</option>
+                      <option value="Other">Other Locations</option>
+                    </select>
+                  </p>
+                  <script>
+                    function localOff(){
+                      document.getElementById("Location").style.display = "none";
+                    }
+                    function localOn(){
+                      document.getElementById("Location").style.display = "block";
+                    }
+                  </script>
+                </div>
+          <div  class="carContainer">
+              <p onclick="clickCar()">
+                <img src="iconcar2.png"  style="width:200px; height:140px; background: transparent"> car info
+              </p>
+              <p onclick="clickCar()">
+                <img src="iconcar3.png"  style="width:200px; height:140px; ;"> car info
+              </p>
+              <p onclick="clickCar()">
+                <img src="iconcar.png"  style="width:200px; height:140px; ;"> car info
+              </p>
+              <p onclick="clickCar()">
+                <img src="iconcar4.png"  style="width:200px; height:140px; ;"> car info
+              </p>
+              <p onclick="clickCar()">
+                <img src="iconcar5.png"  style="width:200px; height:140px; ;"> car info
+              </p>
+              <p onclick="clickCar()">
+                <img src="iconcar.png"  style="width:200px; height:140px; ;"> car info
+              </p>
+              <p onclick="clickCar()">
+                <img src="iconcar2.png"  style="width:200px; height:140px; ;"> car info
+              </p>
+              <p onclick="clickCar()">
+                <img src="iconcar3.png"  style="width:200px; height:140px; ;"> car info
+              </p>
+              <p onclick="clickCar()">
+                <img src="iconcar4.png"  style="width:200px; height:140px; ;"> car info
+              </p>
+          </div>
+
+  </body>
+</html>
