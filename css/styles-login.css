@@ -1,121 +1,229 @@
-        .fa {
-          opacity: 1;
-          text-decoration: none;
-        }
-        #About {
-          position: absolute;
-          display: none;
-          width: 700px;
-          height: 400px;
-          top: 200px;
-          left: 100px;
-          background-color: rgba(0,0,0,0.6);
-          z-index: 2;
-        }
-        #Contact {
-          position: absolute;
-          display: none;
-          width: 700px;
-          height: 400px;
-          top: 200px;
-          left: 100px;
-          background-color: rgba(0,0,0,0.6);
-          z-index: 2;
-        }
-        #aboutSite {
-          position: absolute;
-          top: 50px;
-          left: 100px;
-          font-size: 20px;
-          color: #CEDDD5;
-        }
-        #aboutContact {
-          position: absolute;
-          top: 20px;
-          left: 100px;
-          font-size: 20px;
-          color: #CEDDD5;
-        }
-        body {
-          background-image: url('../photos/bg/bg-login.jpg');
-          background-repeat: no-repeat;
-          background-attachment: fixed;
-          background-size: cover;
-          margin: 0;
-          font-family: monospace;
-        }
-        .topnav {
-          overflow: hidden;
-          background-color: #2C2403;
-        }
-        .topnav a {
-          float: left;
-          border-color: white;
-          color: white;
-          text-align: center;
-          padding: 2.6% 5.5%;
-          text-decoration: none;
-          font-size: 17px;
-        }
-        .topnav a:hover{
-          background-color: #A4AE9D;
-          color: black;
-        }
-        .container {
-          background-color: rgba(44, 36, 3, 0.8);
-          width: 350px;
-          height: 500px;
-          padding: 10px;
-          border-radius: 25px;
-          position: absolute;
-          right: 10%; top: 25%;
+body {
+  background-image: url('../images/bg/bg-login.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  margin: 0;
+  font-family: monospace;
+}
 
-        }
-        .container input{
-          padding: 20px;
-          border-radius: 15px;
-          background-color: rgba(44, 36, 3, 0.5);
-          width: 220px;
-          font-family: monospace;
-          border-color: white;
-          font-size: 18px;
-          color: #CEDDD5;
-        }
-        .container span{
-          text-align: center;
-          color: white;
-          font-size: 8px;
-        }
-        .sign-container {
-          background-color: rgba(44, 36, 3, 0.8);
-          text-align: center;
-          width: 350px;
-          height: 525px;
-          padding: 10px;
-          border-radius: 25px;
-          position: absolute;
-          left: 10%; top:25%;
-        }
-        .sign-container input{
-          padding: 20px;
-          border-radius: 15px;
-          background-color: rgba(44, 36, 3, 0.5);
-          width: 220px;
-          font-family: monospace;
-          border-color: white;
-          font-size: 18px;
-          color: #CEDDD5;
-        }
-        .aboutS{
-          background-color: red;
-        }
-        @media only screen and (max-width: 900px) {
-          /* For mobile phones: */
-          [class="sign-container"] {
-            top: 650px;
-            left: 5%;
-          }
-          [class="container"] {
-            left: 5%;
-          }
-        }
+.fa {
+  opacity: 1;
+  text-decoration: none;
+}
+
+#About {
+  margin: 40px;
+  display: none;
+  flex-wrap: wrap;
+  max-width: 500px;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+#Contact {
+  margin: 40px;
+  display: none;
+  flex-wrap: wrap;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+#aboutSite {  
+  margin: 70px;
+  font-size: 20px;
+  color: #CEDDD5;
+}
+
+#aboutContact {
+  padding: 20px;
+  margin: 70px;
+  font-size: 20px;
+  color: #CEDDD5;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #2C2403;
+}
+
+.topnav a {
+  float: left;
+  border-color: white;
+  color: white;
+  text-align: center;
+  padding: 2.6% 5.5%;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #A4AE9D;
+  color: black;
+  transition: 1s;
+}
+
+.login-signup-container {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.container {
+  text-align: center;
+  justify-content: center;
+  margin: 40px;
+  background-color: rgba(44, 36, 3, 0.8);
+  padding: 40px 70px 50px 70px;
+  border-radius: 25px;
+  display: flex;
+  float: right;
+}
+
+.container h1 {
+  font-size: 40px;
+  color: #CEDDD5;
+}
+
+hr {
+  color: #ffffff;
+}
+
+.container input {
+  padding: 20px;
+  border-radius: 15px;
+  background-color: rgba(44, 36, 3, 0.5);
+  width: 220px;
+  font-family: monospace;
+  border-color: white;
+  font-size: 18px;
+  color: #CEDDD5;
+}
+
+#login-button {
+  background-color: #584E34;
+}
+
+#login-button:hover {
+  background-color: #e0d3b1;
+  color: black;
+  transition: 1s;
+}
+
+#sign-up-button {
+  background-color: #584E34;
+}
+
+#sign-up-button:hover {
+  background-color: #e0d3b1;
+  color: black;
+  transition: 1s;
+}
+
+.container span {
+  text-align: center;
+  color: white;
+  font-size: 8px;
+}
+
+.container p {
+  color: #CEDDD5;
+  font-size: 15px;
+}
+
+.container a {
+  color: #767C68;
+  text-decoration: none;
+}
+
+.container a:hover {
+  color: #ffffff;
+}
+
+.login-infos {
+  margin-top: 30px;
+}
+
+#close-sign {
+  float: right;
+  margin-right: -50px;
+  margin-top: -50px;
+  color: #CEDDD5;
+  font-size: 25px;
+  text-decoration: none;
+}
+
+#close-sign:hover {
+  color: #ffffff;
+}
+
+.sign-container {
+  text-align: center;
+  justify-content: center;
+  margin: 40px 40px 0px 40px;
+  background-color: rgba(44, 36, 3, 0.8);
+  padding: 30px 70px 50px 70px;
+  border-radius: 25px;
+  display: none;
+  flex-direction: column;
+}
+
+.sign-container h1 {
+  font-size: 40px;
+  color: #CEDDD5;
+}
+
+hr {
+  color: #ffffff;
+}
+
+.sign-container input {
+  padding: 20px;
+  border-radius: 15px;
+  background-color: rgba(44, 36, 3, 0.5);
+  width: 220px;
+  border-width: 1px;
+  font-family: monospace;
+  border-color: white;
+  font-size: 18px;
+  color: #CEDDD5;
+}
+
+.sign-container span {
+  text-align: center;
+  color: white;
+  font-size: 8px;
+}
+
+.sign-container p {
+  color: #CEDDD5;
+  font-size: 15px;
+}
+
+.sign-container a {
+  color: #767C68;
+  text-decoration: none;
+}
+
+.sign-container a:hover {
+  color: #ffffff;
+}
+
+.sign-up-infos input{
+  margin: 2px;
+}
+
+.aboutS {
+  background-color: red;
+}
+
+@media only screen and (max-width: 900px) {
+
+  /* For mobile phones: */
+  [class="sign-container"] {
+    top: 650px;
+    left: 5%;
+  }
+
+  [class="container"] {
+    left: 5%;
+  }
+}
